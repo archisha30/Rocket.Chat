@@ -1,9 +1,9 @@
 # 🚀 Project Overview: Rocket.Chat Onboarding Bot
 
-## 1.1 Problem Statement
+## Problem Statement
 New members often feel lost when joining our Rocket.Chat workspace. To save time and make onboarding smoother, we aim to create a friendly bot that guides users through the initial steps automatically.
 
-## 1.2 Why This Problem Exists or Matters
+## Why This Problem Exists or Matters
 New members often feel lost when joining a Rocket.Chat workspace because there's no guided onboarding process. This matters because it:
 - Slows down collaboration
 - Increases admin workload  
@@ -14,12 +14,12 @@ New members often feel lost when joining a Rocket.Chat workspace because there's
 - **Admins/developers** → save time by automating repetitive onboarding
 - **Teams/community** → improved communication and productivity
 
-## 1.3 Stretch Goals (If Time Permits)
+## Stretch Goals (If Time Permits)
 1. Multi-language or customizable welcome messages
 2. AI-based FAQ responses
 3. Role-based personalized onboarding paths
 
-## 2.3 Tech Stack & Tools
+## Tech Stack & Tools
 
 **Languages:** HTML, CSS, JavaScript
 
