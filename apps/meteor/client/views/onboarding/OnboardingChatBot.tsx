@@ -184,22 +184,27 @@ export const OnboardingChatBot: React.FC = () => {
 	};
 
 	return (
-		<Box display='flex' flexDirection='column' height='100%' backgroundColor='surface'>
+		<Box display='flex' flexDirection='column' height='100%' style={{ backgroundColor: '#edf2f4' }}>
 			{/* Chat Header */}
 			<Box
 				padding='x16'
-				backgroundColor='primary'
-				color='white'
 				display='flex'
 				alignItems='center'
 				gap='x12'
 				borderRadius='x4 x4 0 0'
+				style={{ 
+					backgroundColor: '#ef233c',
+					background: 'linear-gradient(135deg, #ef233c 0%, #d90429 100%)',
+					boxShadow: '0 2px 8px rgba(239, 35, 60, 0.3)'
+				}}
 			>
-				<Avatar size='x32' url='/images/logo/logo.svg' />
+				<Avatar size='x32' url='/images/logo/logo.svg' style={{ border: '2px solid white' }} />
 				<Box>
-					<Box fontWeight='bold'>Rocket.Chat Assistant</Box>
-					<Box fontSize='p2' opacity={0.8}>
-						Online • Here to help
+					<Box fontWeight='bold' style={{ color: 'white', fontSize: '18px' }}>
+						🤖 Rocket.Chat Assistant
+					</Box>
+					<Box fontSize='p2' style={{ color: '#edf2f4', opacity: 0.95 }}>
+						● Online • Here to help
 					</Box>
 				</Box>
 			</Box>
@@ -212,6 +217,7 @@ export const OnboardingChatBot: React.FC = () => {
 				display='flex'
 				flexDirection='column'
 				gap='x12'
+				style={{ backgroundColor: '#edf2f4' }}
 			>
 				{messages.map((message) => (
 					<Box
@@ -223,7 +229,7 @@ export const OnboardingChatBot: React.FC = () => {
 							{message.sender === 'bot' && (
 								<Box display='flex' alignItems='center' gap='x8' marginBlockEnd='x4'>
 									<Avatar size='x24' url='/images/logo/logo.svg' />
-									<Box fontSize='p2' color='hint'>
+									<Box fontSize='p2' style={{ color: '#2b2d42', fontWeight: '600' }}>
 										Bot
 									</Box>
 								</Box>
@@ -231,9 +237,15 @@ export const OnboardingChatBot: React.FC = () => {
 							<Box
 								padding='x12'
 								borderRadius='x4'
-								backgroundColor={message.sender === 'user' ? 'primary' : 'surface-light'}
-								color={message.sender === 'user' ? 'white' : 'default'}
-								style={{ whiteSpace: 'pre-line' }}
+								style={{
+									backgroundColor: message.sender === 'user' ? '#ef233c' : 'white',
+									color: message.sender === 'user' ? 'white' : '#2b2d42',
+									whiteSpace: 'pre-line',
+									boxShadow: message.sender === 'user' 
+										? '0 2px 8px rgba(239, 35, 60, 0.3)' 
+										: '0 2px 8px rgba(0, 0, 0, 0.1)',
+									border: message.sender === 'bot' ? '1px solid #d8dbe0' : 'none'
+								}}
 							>
 								{message.text}
 							</Box>
@@ -244,13 +256,28 @@ export const OnboardingChatBot: React.FC = () => {
 											key={index}
 											small
 											onClick={() => handleOptionClick(option)}
+											style={{
+												backgroundColor: 'white',
+												color: '#ef233c',
+												border: '2px solid #ef233c',
+												fontWeight: '600',
+												transition: 'all 0.2s ease'
+											}}
+											onMouseEnter={(e) => {
+												e.currentTarget.style.backgroundColor = '#ef233c';
+												e.currentTarget.style.color = 'white';
+											}}
+											onMouseLeave={(e) => {
+												e.currentTarget.style.backgroundColor = 'white';
+												e.currentTarget.style.color = '#ef233c';
+											}}
 										>
 											{option}
 										</Button>
 									))}
 								</Box>
 							)}
-							<Box fontSize='p2' color='hint' marginBlockStart='x4'>
+							<Box fontSize='p2' marginBlockStart='x4' style={{ color: '#8d99ae' }}>
 								{message.timestamp.toLocaleTimeString([], {
 									hour: '2-digit',
 									minute: '2-digit',
@@ -266,30 +293,39 @@ export const OnboardingChatBot: React.FC = () => {
 						<Box
 							padding='x12'
 							borderRadius='x4'
-							backgroundColor='surface-light'
 							display='flex'
 							gap='x4'
+							style={{ 
+								backgroundColor: 'white',
+								boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)'
+							}}
 						>
 							<Box
 								width='x8'
 								height='x8'
 								borderRadius='full'
-								backgroundColor='hint'
-								style={{ animation: 'pulse 1.4s infinite' }}
+								style={{ 
+									backgroundColor: '#ef233c',
+									animation: 'pulse 1.4s infinite'
+								}}
 							/>
 							<Box
 								width='x8'
 								height='x8'
 								borderRadius='full'
-								backgroundColor='hint'
-								style={{ animation: 'pulse 1.4s infinite 0.2s' }}
+								style={{ 
+									backgroundColor: '#ef233c',
+									animation: 'pulse 1.4s infinite 0.2s'
+								}}
 							/>
 							<Box
 								width='x8'
 								height='x8'
 								borderRadius='full'
-								backgroundColor='hint'
-								style={{ animation: 'pulse 1.4s infinite 0.4s' }}
+								style={{ 
+									backgroundColor: '#ef233c',
+									animation: 'pulse 1.4s infinite 0.4s'
+								}}
 							/>
 						</Box>
 					</Box>
@@ -301,11 +337,15 @@ export const OnboardingChatBot: React.FC = () => {
 			{/* Input Area */}
 			<Box
 				padding='x16'
-				backgroundColor='surface-light'
 				display='flex'
 				gap='x8'
 				alignItems='center'
 				borderRadius='0 0 x4 x4'
+				style={{ 
+					backgroundColor: 'white',
+					borderTop: '2px solid #d8dbe0',
+					boxShadow: '0 -2px 8px rgba(0, 0, 0, 0.05)'
+				}}
 			>
 				<TextInput
 					placeholder='Type your message...'
@@ -313,8 +353,38 @@ export const OnboardingChatBot: React.FC = () => {
 					onChange={(e) => setInputValue(e.currentTarget.value)}
 					onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
 					flexGrow={1}
+					style={{
+						border: '2px solid #d8dbe0',
+						borderRadius: '8px',
+						padding: '10px',
+						fontSize: '14px'
+					}}
 				/>
-				<Button primary onClick={handleSendMessage} disabled={!inputValue.trim()}>
+				<Button 
+					onClick={handleSendMessage} 
+					disabled={!inputValue.trim()}
+					style={{
+						backgroundColor: '#ef233c',
+						color: 'white',
+						border: 'none',
+						borderRadius: '8px',
+						padding: '10px 16px',
+						cursor: inputValue.trim() ? 'pointer' : 'not-allowed',
+						opacity: inputValue.trim() ? 1 : 0.5,
+						transition: 'all 0.2s ease',
+						boxShadow: inputValue.trim() ? '0 2px 8px rgba(239, 35, 60, 0.3)' : 'none'
+					}}
+					onMouseEnter={(e) => {
+						if (inputValue.trim()) {
+							e.currentTarget.style.backgroundColor = '#d90429';
+							e.currentTarget.style.transform = 'scale(1.05)';
+						}
+					}}
+					onMouseLeave={(e) => {
+						e.currentTarget.style.backgroundColor = '#ef233c';
+						e.currentTarget.style.transform = 'scale(1)';
+					}}
+				>
 					<Icon name='send' size='x20' />
 				</Button>
 			</Box>
@@ -322,8 +392,8 @@ export const OnboardingChatBot: React.FC = () => {
 			<style>
 				{`
 					@keyframes pulse {
-						0%, 100% { opacity: 0.4; }
-						50% { opacity: 1; }
+						0%, 100% { opacity: 0.4; transform: scale(1); }
+						50% { opacity: 1; transform: scale(1.2); }
 					}
 				`}
 			</style>
