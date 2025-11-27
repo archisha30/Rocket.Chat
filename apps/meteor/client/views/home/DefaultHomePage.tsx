@@ -27,14 +27,11 @@ const DefaultHomePage = (): ReactElement => {
 	const isCustomContentBodyEmpty = useSetting('Layout_Home_Body', '') === '';
 	const isCustomContentVisible = useSetting('Layout_Home_Custom_Block_Visible', false);
 	
-	const [showOnboarding, setShowOnboarding] = useState(false);
+	const [showOnboarding, setShowOnboarding] = useState(true);
 
+	// Chatbot loads every time the page loads
 	useEffect(() => {
-		// Check if user has seen onboarding before
-		const hasSeenOnboarding = localStorage.getItem('hasSeenOnboarding');
-		if (!hasSeenOnboarding) {
-			setShowOnboarding(true);
-		}
+		setShowOnboarding(true);
 	}, []);
 
 	const handleOpenOnboarding = useCallback(() => {
@@ -43,7 +40,7 @@ const DefaultHomePage = (): ReactElement => {
 
 	const handleCloseOnboarding = () => {
 		setShowOnboarding(false);
-		localStorage.setItem('hasSeenOnboarding', 'true');
+		// Note: Chatbot will reappear on next page load
 	};
 
 	// Listen for /onboarding command trigger
