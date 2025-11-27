@@ -1,5 +1,6 @@
 import React from 'react';
-import { Modal, Box } from '@rocket.chat/fuselage';
+import { Box } from '@rocket.chat/fuselage';
+import { GenericModal } from '@rocket.chat/ui-client';
 import { OnboardingBot } from './OnboardingBot';
 
 interface OnboardingModalProps {
@@ -8,15 +9,15 @@ interface OnboardingModalProps {
 
 export const OnboardingModal: React.FC<OnboardingModalProps> = ({ onClose }) => {
 	return (
-		<Modal open>
-			<Modal.Header>
-				<Modal.Close onClick={onClose} />
-			</Modal.Header>
-			<Modal.Content>
-				<Box height='600px'>
-					<OnboardingBot />
-				</Box>
-			</Modal.Content>
-		</Modal>
+		<GenericModal
+			title="Welcome to Rocket.Chat"
+			onClose={onClose}
+			variant="warning"
+			wrapperFunction={(props) => <Box {...props} width='100%' maxWidth='900px' />}
+		>
+			<Box height='600px' overflow='auto'>
+				<OnboardingBot />
+			</Box>
+		</GenericModal>
 	);
 };
