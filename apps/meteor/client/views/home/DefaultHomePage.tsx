@@ -1,6 +1,7 @@
 import { Box, CardGroup } from '@rocket.chat/fuselage';
 import { useAtLeastOnePermission, useSetting, useTranslation, useRole, usePermission } from '@rocket.chat/ui-contexts';
 import type { ReactElement } from 'react';
+import { useState, useEffect } from 'react';
 
 import HomePageHeader from './HomePageHeader';
 import AddUsersCard from './cards/AddUsersCard';
@@ -12,6 +13,7 @@ import JoinRoomsCard from './cards/JoinRoomsCard';
 import MobileAppsCard from './cards/MobileAppsCard';
 import Page from '../../components/Page/Page';
 import PageScrollableContent from '../../components/Page/PageScrollableContent';
+import { OnboardingModal } from '../onboarding';
 
 const CREATE_CHANNEL_PERMISSIONS = ['create-c', 'create-p'];
 
@@ -23,6 +25,21 @@ const DefaultHomePage = (): ReactElement => {
 	const workspaceName = useSetting('Site_Name');
 	const isCustomContentBodyEmpty = useSetting('Layout_Home_Body', '') === '';
 	const isCustomContentVisible = useSetting('Layout_Home_Custom_Block_Visible', false);
+	
+	const [showOnboarding, setShowOnboarding] = useState(false);
+
+	useEffect(() => {
+		// Check if user has seen onboarding before
+		const hasSeenOnboarding = localStorage.getItem('hasSeenOnboarding');
+		if (!hasSeenOnboarding) {
+			setShowOnboarding(true);
+		}
+	}, []);
+
+	const handleCloseOnboarding = () => {
+		setShowOnboarding(false);
+		localStorage.setItem('hasSeenOnboarding', 'true');
+	};
 
 	return (
 		<Page color='default' data-qa='page-home' data-qa-type='default' background='tint'>
@@ -46,6 +63,7 @@ const DefaultHomePage = (): ReactElement => {
 					</CardGroup>
 				</Box>
 			</PageScrollableContent>
+			{showOnboarding && <OnboardingModal onClose={handleCloseOnboarding} />}
 		</Page>
 	);
 };
