@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Box, Button, TextInput, Icon, Avatar } from '@rocket.chat/fuselage';
 import { useTranslation } from 'react-i18next';
+import { useRocketChatActions } from './hooks/useRocketChatActions';
 
 interface Message {
 	id: string;
@@ -17,6 +18,9 @@ export const OnboardingChatBot: React.FC = () => {
 	const [isTyping, setIsTyping] = useState(false);
 	const [currentStep, setCurrentStep] = useState(0);
 	const messagesEndRef = useRef<HTMLDivElement>(null);
+	
+	// API integration
+	const { getCurrentUser, getJoinedChannels, sendMessage, runCommand, isAuthenticated, loading } = useRocketChatActions();
 
 	const scrollToBottom = () => {
 		messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -27,12 +31,27 @@ export const OnboardingChatBot: React.FC = () => {
 	}, [messages]);
 
 	useEffect(() => {
-		// Initial greeting
-		setTimeout(() => {
-			addBotMessage(
-				"👋 Hi there! I'm your Rocket.Chat assistant. I'm here to help you get started!",
-				['Get Started', 'Skip Tour']
-			);
+		// Initial greeting with user info
+		setTimeout(async () => {
+			if (isAuthenticated()) {
+				const userInfo = await getCurrentUser();
+				if (userInfo && userInfo.success) {
+					addBotMessage(
+						`👋 Hi ${userInfo.user.name || userInfo.user.username}! I'm your Rocket.Chat assistant. I'm here to help you get started!`,
+						['Get Started', 'Skip Tour']
+					);
+				} else {
+					addBotMessage(
+						"👋 Hi there! I'm your Rocket.Chat assistant. I'm here to help you get started!",
+						['Get Started', 'Skip Tour']
+					);
+				}
+			} else {
+				addBotMessage(
+					"👋 Hi there! I'm your Rocket.Chat assistant. I'm here to help you get started!",
+					['Get Started', 'Skip Tour']
+				);
+			}
 		}, 500);
 	}, []);
 
@@ -111,11 +130,24 @@ export const OnboardingChatBot: React.FC = () => {
 			}, 1000);
 		} else if (input.includes('show me channels') || input.includes('join a channel')) {
 			setCurrentStep(3);
-			setTimeout(() => {
-				addBotMessage(
-					"🔍 Here are some popular channels you might like:\n\n• #general - Company-wide announcements\n• #random - Casual conversations\n• #help - Get support from the team\n\nWould you like to invite your team members?",
-					['Yes, Invite Team', 'Maybe Later']
-				);
+			setTimeout(async () => {
+				// Fetch real channels using API
+				const channelsData = await getJoinedChannels();
+				if (channelsData && channelsData.success && channelsData.channels.length > 0) {
+					const channelList = channelsData.channels
+						.slice(0, 5)
+						.map((ch) => `• #${ch.name} - ${ch.usersCount} members, ${ch.msgs} messages`)
+						.join('\n');
+					addBotMessage(
+						`🔍 Here are your joined channels:\n\n${channelList}\n\nWould you like to invite your team members?`,
+						['Yes, Invite Team', 'Maybe Later']
+					);
+				} else {
+					addBotMessage(
+						"🔍 Here are some popular channels you might like:\n\n• #general - Company-wide announcements\n• #random - Casual conversations\n• #help - Get support from the team\n\nWould you like to invite your team members?",
+						['Yes, Invite Team', 'Maybe Later']
+					);
+				}
 			}, 1000);
 		} else if (input.includes('create my own channel')) {
 			setCurrentStep(3);
@@ -145,8 +177,52 @@ export const OnboardingChatBot: React.FC = () => {
 			setCurrentStep(6);
 			setTimeout(() => {
 				addBotMessage(
-					"🎉 Excellent! You're all set! Here are some quick tips:\n\n• Use @ to mention teammates\n• Press Ctrl+K for quick search\n• Star important messages\n• Use threads to organize discussions\n\nNeed anything else?",
-					['Start Chatting', 'Show Help Center', 'Restart Tour']
+					"🎉 Excellent! You're all set! Here are some quick tips:\n\n• Use @ to mention teammates\n• Press Ctrl+K for quick search\n• Star important messages\n• Use threads to organize discussions\n\nWould you like me to post a welcome message in #general?",
+					['Yes, Post Welcome', 'No Thanks', 'Restart Tour']
+				);
+			}, 1000);
+		} else if (input.includes('yes, post welcome') || input.includes('post welcome')) {
+			setTimeout(async () => {
+				// Try to post a welcome message to general channel
+				const channelsData = await getJoinedChannels();
+				if (channelsData && channelsData.success) {
+					const generalChannel = channelsData.channels.find((ch) => ch.name === 'general');
+					if (generalChannel) {
+						const userInfo = await getCurrentUser();
+						const userName = userInfo?.user.name || 'New user';
+						const success = await sendMessage(
+							generalChannel._id,
+							`👋 Hi everyone! ${userName} just completed the onboarding. Say hello! 🎉`
+						);
+						if (success) {
+							addBotMessage(
+								"✅ Welcome message posted to #general! Your team will see it. Ready to start chatting?",
+								['Start Chatting', 'Show Help Center']
+							);
+						} else {
+							addBotMessage(
+								"I couldn't post the message, but you're all set to start chatting!",
+								['Start Chatting', 'Show Help Center']
+							);
+						}
+					} else {
+						addBotMessage(
+							"Couldn't find #general channel, but you're all set to start chatting!",
+							['Start Chatting', 'Show Help Center']
+						);
+					}
+				} else {
+					addBotMessage(
+						"You're all set to start chatting! Welcome to Rocket.Chat! 🚀",
+						['Start Chatting', 'Show Help Center']
+					);
+				}
+			}, 1000);
+		} else if (input.includes('no thanks')) {
+			setTimeout(() => {
+				addBotMessage(
+					"No problem! You're all set to start chatting. Welcome to Rocket.Chat! 🚀",
+					['Start Chatting', 'Show Help Center']
 				);
 			}, 1000);
 		} else if (input.includes('skip')) {
