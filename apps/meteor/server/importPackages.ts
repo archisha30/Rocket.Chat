@@ -52,6 +52,7 @@ import '../app/slashcommand-asciiarts/server';
 import '../app/slashcommands-create/server';
 import '../app/slashcommands-help/server';
 import '../app/slashcommands-hide/server';
+import '../app/slashcommands-onboarding/server';
 import '../app/slashcommands-invite/server';
 import '../app/slashcommands-inviteall/server';
 import '../app/slashcommands-join/server';

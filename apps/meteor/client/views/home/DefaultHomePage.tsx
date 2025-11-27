@@ -1,7 +1,7 @@
 import { Box, CardGroup } from '@rocket.chat/fuselage';
 import { useAtLeastOnePermission, useSetting, useTranslation, useRole, usePermission } from '@rocket.chat/ui-contexts';
 import type { ReactElement } from 'react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 import HomePageHeader from './HomePageHeader';
 import AddUsersCard from './cards/AddUsersCard';
@@ -14,6 +14,7 @@ import MobileAppsCard from './cards/MobileAppsCard';
 import Page from '../../components/Page/Page';
 import PageScrollableContent from '../../components/Page/PageScrollableContent';
 import { OnboardingModal } from '../onboarding';
+import { useOnboardingModalTrigger } from '../onboarding/useOnboardingModal';
 
 const CREATE_CHANNEL_PERMISSIONS = ['create-c', 'create-p'];
 
@@ -36,10 +37,17 @@ const DefaultHomePage = (): ReactElement => {
 		}
 	}, []);
 
+	const handleOpenOnboarding = useCallback(() => {
+		setShowOnboarding(true);
+	}, []);
+
 	const handleCloseOnboarding = () => {
 		setShowOnboarding(false);
 		localStorage.setItem('hasSeenOnboarding', 'true');
 	};
+
+	// Listen for /onboarding command trigger
+	useOnboardingModalTrigger(handleOpenOnboarding);
 
 	return (
 		<Page color='default' data-qa='page-home' data-qa-type='default' background='tint'>
