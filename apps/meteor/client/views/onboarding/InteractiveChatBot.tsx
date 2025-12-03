@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Box, Button, TextInput, Icon, Avatar, CheckBox, RadioButton } from '@rocket.chat/fuselage';
 import { useTranslation } from 'react-i18next';
 import { useRocketChatActions } from './hooks/useRocketChatActions';
+import { chatbotActions } from './api/chatbotActions';
 
 interface Message {
 	id: string;
@@ -278,7 +279,7 @@ export const InteractiveChatBot: React.FC = () => {
 		return baseQuestions[questionIndex];
 	};
 
-	const askQuestion = (index: number) => {
+	const askQuestion = (index: number, profileOverride?: UserProfile) => {
 		// Determine when to end based on dynamic flow
 		const maxQuestions = availableChannels.length > 0 ? 8 : 7;
 		
@@ -295,9 +296,12 @@ export const InteractiveChatBot: React.FC = () => {
 
 		let questionText = q.question;
 
+		// Use profileOverride if provided (for immediate updates), otherwise use state
+		const currentProfile = profileOverride || userProfile;
+
 		// Replace placeholders with user data
-		if (userProfile.name) {
-			questionText = questionText.replace('{name}', userProfile.name);
+		if (currentProfile.name) {
+			questionText = questionText.replace(/\{name\}/g, currentProfile.name);
 		}
 
 		setTimeout(() => {
@@ -383,10 +387,10 @@ export const InteractiveChatBot: React.FC = () => {
 			
 			addBotMessage(acknowledgment);
 			
-			// Move to next question
+			// Move to next question - pass the updated profile to avoid state timing issues
 			setTimeout(() => {
 				setCurrentQuestion(questionIndex + 1);
-				askQuestion(questionIndex + 1);
+				askQuestion(questionIndex + 1, newProfile);
 			}, 1000);
 		}, 500);
 	};
@@ -468,6 +472,43 @@ export const InteractiveChatBot: React.FC = () => {
 				}, i * 800);
 			}
 
+			// Execute API actions based on profile
+			setTimeout(async () => {
+				try {
+					// Update user profile
+					if (userProfile.name) {
+						await chatbotActions.setupUserProfile({
+							name: userProfile.name,
+							status: `${userProfile.role} - New to Rocket.Chat!`,
+						});
+						addBotMessage("✅ Your profile has been updated!");
+					}
+
+					// Join recommended channels based on role
+					if (userProfile.role) {
+						const result = await chatbotActions.joinRecommendedChannels(userProfile.role);
+						if (result.success && result.joined.length > 0) {
+							addBotMessage(`✅ I've added you to: ${result.joined.join(', ')}`);
+						}
+					}
+
+					// Create interest-based channels
+					if (userProfile.interests && userProfile.interests.length > 0) {
+						const channelResult = await chatbotActions.createWelcomeChannels(
+							userProfile.interests.slice(0, 2) // Limit to 2 channels
+						);
+						if (channelResult.success) {
+							const created = channelResult.channels.filter(ch => ch.success);
+							if (created.length > 0) {
+								addBotMessage(`✅ Created channels for your interests!`);
+							}
+						}
+					}
+				} catch (error) {
+					console.error('Error executing API actions:', error);
+				}
+			}, recommendations.length * 800 + 500);
+
 			// Final options
 			setTimeout(() => {
 				addBotMessage(
@@ -475,13 +516,13 @@ export const InteractiveChatBot: React.FC = () => {
 					[
 						'🚀 Start Chatting',
 						'📢 Post Welcome Message',
-						'👥 Invite Team',
-						'⚙️ Customize Settings',
+						'👥 Discover Team',
+						'📋 Show Commands',
 						'🔄 Start Over',
 					],
 					'options'
 				);
-			}, recommendations.length * 800 + 1000);
+			}, recommendations.length * 800 + 2000);
 		}, 1500);
 	};
 
@@ -517,7 +558,7 @@ export const InteractiveChatBot: React.FC = () => {
 		setMessages((prev) => [...prev, newMessage]);
 	};
 
-	const handleOptionClick = (option: string) => {
+	const handleOptionClick = async (option: string) => {
 		// Check if this is a final action
 		if (option === '🚀 Start Chatting') {
 			addUserMessage(option);
@@ -529,13 +570,63 @@ export const InteractiveChatBot: React.FC = () => {
 
 		if (option === '📢 Post Welcome Message') {
 			addUserMessage(option);
-			postWelcomeMessage();
+			await postWelcomeMessage();
+			return;
+		}
+
+		if (option === '👥 Discover Team') {
+			addUserMessage(option);
+			await discoverTeamMembers();
+			return;
+		}
+
+		if (option === '📋 Show Commands') {
+			addUserMessage(option);
+			await showAvailableCommands();
+			return;
+		}
+
+		if (option === '⚙️ Customize Settings') {
+			addUserMessage(option);
+			setTimeout(() => {
+				addBotMessage("Let me show you some customization options...");
+				setTimeout(() => {
+					addBotMessage(
+						"What would you like to customize?",
+						[
+							'🔔 Notifications',
+							'🎨 Theme & Appearance',
+							'🔒 Privacy Settings',
+							'⬅️ Back to Menu',
+						],
+						'options'
+					);
+				}, 1000);
+			}, 500);
 			return;
 		}
 
 		if (option === '🔄 Start Over') {
 			addUserMessage(option);
 			restartConversation();
+			return;
+		}
+
+		if (option === '⬅️ Back to Menu') {
+			addUserMessage(option);
+			setTimeout(() => {
+				addBotMessage(
+					"What would you like to do next?",
+					[
+						'🚀 Start Chatting',
+						'📢 Post Welcome Message',
+						'👥 Discover Team',
+						'📋 Show Commands',
+						'🔄 Start Over',
+					],
+					'options'
+				);
+			}, 500);
 			return;
 		}
 
@@ -560,18 +651,112 @@ export const InteractiveChatBot: React.FC = () => {
 
 	const postWelcomeMessage = async () => {
 		setTimeout(async () => {
-			const channelsData = await getJoinedChannels();
-			if (channelsData && channelsData.success) {
-				const generalChannel = channelsData.channels.find((ch) => ch.name === 'general');
-				if (generalChannel) {
-					const success = await sendMessage(
-						generalChannel._id,
-						`👋 Hi everyone! ${userProfile.name} (${userProfile.role}) just joined the team! Say hello! 🎉`
-					);
-					if (success) {
-						addBotMessage("✅ Welcome message posted to #general! Your team will see it.");
-					}
+			try {
+				addBotMessage("Posting your welcome message... 📝");
+				
+				const result = await chatbotActions.sendWelcomeMessages(
+					userProfile.name || 'New User',
+					userProfile.role || 'Team Member'
+				);
+
+				if (result.success) {
+					addBotMessage("✅ Welcome message posted to #general! Your team will see it.");
+					
+					// Show next options
+					setTimeout(() => {
+						addBotMessage(
+							"What else would you like to do?",
+							[
+								'👥 Discover Team',
+								'📋 Show Commands',
+								'🚀 Start Chatting',
+							],
+							'options'
+						);
+					}, 1500);
+				} else {
+					addBotMessage("⚠️ Couldn't post the message, but you can do it manually later!");
 				}
+			} catch (error) {
+				console.error('Post welcome error:', error);
+				addBotMessage("⚠️ Couldn't post the message, but you can do it manually later!");
+			}
+		}, 500);
+	};
+
+	const discoverTeamMembers = async () => {
+		setTimeout(async () => {
+			try {
+				addBotMessage("Let me find your team members... 🔍");
+				
+				const result = await chatbotActions.discoverTeamMembers();
+
+				if (result.success && result.users.length > 0) {
+					const userCount = result.users.length;
+					addBotMessage(`Found ${userCount} team members! Here are some of them:`);
+					
+					// Show first 5 users
+					const topUsers = result.users.slice(0, 5);
+					setTimeout(() => {
+						const userList = topUsers
+							.map((user: any) => `👤 ${user.name || user.username} (@${user.username})`)
+							.join('\n');
+						addBotMessage(userList);
+						
+						setTimeout(() => {
+							addBotMessage(
+								"Would you like to:",
+								[
+									'💬 Start a Direct Message',
+									'👥 Create Team Space',
+									'⬅️ Back to Menu',
+								],
+								'options'
+							);
+						}, 1500);
+					}, 1000);
+				} else {
+					addBotMessage("No team members found yet. You might be the first one! 🎉");
+				}
+			} catch (error) {
+				console.error('Discover team error:', error);
+				addBotMessage("⚠️ Couldn't fetch team members right now.");
+			}
+		}, 500);
+	};
+
+	const showAvailableCommands = async () => {
+		setTimeout(async () => {
+			try {
+				addBotMessage("Here are some useful commands you can use:");
+				
+				setTimeout(() => {
+					addBotMessage(
+						`📋 **Available Commands:**\n\n` +
+						`• \`/help\` - Show help information\n` +
+						`• \`/invite @username\` - Invite user to channel\n` +
+						`• \`/join #channel\` - Join a channel\n` +
+						`• \`/leave\` - Leave current channel\n` +
+						`• \`/me message\` - Send action message\n` +
+						`• \`/topic new topic\` - Set channel topic\n` +
+						`• \`/mute @username\` - Mute user\n` +
+						`• \`/archive\` - Archive channel`
+					);
+
+					setTimeout(() => {
+						addBotMessage(
+							"Want to try something else?",
+							[
+								'👥 Discover Team',
+								'📢 Post Welcome Message',
+								'🚀 Start Chatting',
+							],
+							'options'
+						);
+					}, 2000);
+				}, 1000);
+			} catch (error) {
+				console.error('Show commands error:', error);
 			}
 		}, 500);
 	};

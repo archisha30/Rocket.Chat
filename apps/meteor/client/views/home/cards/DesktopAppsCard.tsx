@@ -25,6 +25,21 @@ const DesktopAppsCard = (props: Omit<ComponentProps<typeof Card>, 'type'>): Reac
 			]}
 			width='x340'
 			data-qa-id='homepage-desktop-apps-card'
+			icon='desktop'
+			type='success'
+			style={{
+				borderLeft: '4px solid #06b6d4',
+				transition: 'all 0.3s ease',
+				cursor: 'pointer',
+			}}
+			onMouseEnter={(e: any) => {
+				e.currentTarget.style.transform = 'translateY(-4px)';
+				e.currentTarget.style.boxShadow = '0 12px 24px rgba(6, 182, 212, 0.2)';
+			}}
+			onMouseLeave={(e: any) => {
+				e.currentTarget.style.transform = 'translateY(0)';
+				e.currentTarget.style.boxShadow = 'none';
+			}}
 			{...props}
 		/>
 	);

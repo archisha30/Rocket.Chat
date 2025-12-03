@@ -23,6 +23,21 @@ const MobileAppsCard = (props: Omit<ComponentProps<typeof Card>, 'type'>): React
 			]}
 			data-qa-id='homepage-mobile-apps-card'
 			width='x340'
+			icon='mobile'
+			type='info'
+			style={{
+				borderLeft: '4px solid #8b5cf6',
+				transition: 'all 0.3s ease',
+				cursor: 'pointer',
+			}}
+			onMouseEnter={(e: any) => {
+				e.currentTarget.style.transform = 'translateY(-4px)';
+				e.currentTarget.style.boxShadow = '0 12px 24px rgba(139, 92, 246, 0.2)';
+			}}
+			onMouseLeave={(e: any) => {
+				e.currentTarget.style.transform = 'translateY(0)';
+				e.currentTarget.style.boxShadow = 'none';
+			}}
 			{...props}
 		/>
 	);
