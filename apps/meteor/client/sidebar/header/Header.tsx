@@ -23,6 +23,11 @@ const Header = (): ReactElement => {
 		<FeaturePreview feature='newNavigation'>
 			<FeaturePreviewOff>
 				<Sidebar.TopBar.Section>
+					<img
+						src="/images/aashilogo.png" 
+						style={{ width: '120px', margin: '0 auto', display: 'block', padding: '12px' }}
+						alt="aashi"
+					/>
 					{user ? <UserMenu user={user} /> : <UserAvatarWithStatus />}
 					<SidebarHeaderToolbar aria-label={t('Sidebar_actions')}>
 						<Home title={t('Home')} />
@@ -41,6 +46,11 @@ const Header = (): ReactElement => {
 			</FeaturePreviewOff>
 			<FeaturePreviewOn>
 				<SidebarSection>
+					<img
+						src="/images/aashilogo.png"
+						style={{ width: '120px', margin: '0 auto', display: 'block', padding: '12px' }}
+						alt="My Logo"
+					/>
 					{user ? <UserMenu user={user} /> : <UserAvatarWithStatus />}
 					<SidebarHeaderToolbar aria-label={t('Sidebar_actions')}>
 						<Home title={t('Home')} />

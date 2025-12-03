@@ -18,6 +18,21 @@ const CreateChannelsCard = (props: Omit<ComponentProps<typeof Card>, 'type'>): R
 			buttons={[<GenericCardButton key={1} onClick={openCreateChannelModal} children={t('Create_channel')} />]}
 			data-qa-id='homepage-create-channels-card'
 			width='x340'
+			icon='hash'
+			type='success'
+			style={{
+				borderLeft: '4px solid #10b981',
+				transition: 'all 0.3s ease',
+				cursor: 'pointer',
+			}}
+			onMouseEnter={(e: any) => {
+				e.currentTarget.style.transform = 'translateY(-4px)';
+				e.currentTarget.style.boxShadow = '0 12px 24px rgba(16, 185, 129, 0.2)';
+			}}
+			onMouseLeave={(e: any) => {
+				e.currentTarget.style.transform = 'translateY(0)';
+				e.currentTarget.style.boxShadow = 'none';
+			}}
 			{...props}
 		/>
 	);

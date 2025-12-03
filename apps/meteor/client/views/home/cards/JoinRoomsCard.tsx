@@ -19,6 +19,21 @@ const JoinRoomsCard = (props: Omit<ComponentProps<typeof Card>, 'type'>): ReactE
 			buttons={[<GenericCardButton key={1} onClick={handleDirectory} children={t('Open_directory')} />]}
 			data-qa-id='homepage-join-rooms-card'
 			width='x340'
+			icon='discover'
+			type='info'
+			style={{
+				borderLeft: '4px solid #3b82f6',
+				transition: 'all 0.3s ease',
+				cursor: 'pointer',
+			}}
+			onMouseEnter={(e: any) => {
+				e.currentTarget.style.transform = 'translateY(-4px)';
+				e.currentTarget.style.boxShadow = '0 12px 24px rgba(59, 130, 246, 0.3)';
+			}}
+			onMouseLeave={(e: any) => {
+				e.currentTarget.style.transform = 'translateY(0)';
+				e.currentTarget.style.boxShadow = 'none';
+			}}
 			{...props}
 		/>
 	);
