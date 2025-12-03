@@ -1,0 +1,14 @@
+# Railway ignore file
+node_modules/
+.git/
+.meteor/local/
+*.log
+.DS_Store
+.env.local
+.vscode/
+.idea/
+coverage/
+dist/
+build/
+*.test.js
+*.spec.js
