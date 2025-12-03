@@ -1,4 +1,5 @@
 import '../lib/rooms/roomTypes';
+import '../styles/customTheme.css';
 import './appRoot';
 import './audit';
 import './callbacks';

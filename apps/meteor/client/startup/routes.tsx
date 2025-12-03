@@ -23,6 +23,7 @@ const ResetPasswordPage = lazy(() =>
 );
 const OAuthAuthorizationPage = lazy(() => import('../views/oauth/OAuthAuthorizationPage'));
 const OAuthErrorPage = lazy(() => import('../views/oauth/OAuthErrorPage'));
+const ChatbotRoute = lazy(() => import('../views/chatbot/ChatbotRoute'));
 const NotFoundPage = lazy(() => import('../views/notFound/NotFoundPage'));
 
 declare module '@rocket.chat/ui-contexts' {
@@ -106,6 +107,10 @@ declare module '@rocket.chat/ui-contexts' {
 		'saml': {
 			pathname: `/saml/${string}`;
 			pattern: '/saml/:token';
+		};
+		'chatbot': {
+			pathname: '/chatbot';
+			pattern: '/chatbot';
 		};
 	}
 }
@@ -232,6 +237,15 @@ router.defineRoutes([
 		path: '/saml/:token',
 		id: 'saml',
 		element: appLayout.wrap(<SAMLLoginRoute />),
+	},
+	{
+		path: '/chatbot',
+		id: 'chatbot',
+		element: appLayout.wrap(
+			<MainLayout>
+				<ChatbotRoute />
+			</MainLayout>,
+		),
 	},
 	{
 		path: '*',

@@ -47,6 +47,8 @@ import './v1/voip/queues';
 import './v1/voip/omnichannel';
 import './v1/voip';
 import './v1/moderation';
+import './v1/chatbot';
+import './v1/onboarding';
 
 // This has to come last so all endpoints are registered before generating the OpenAPI documentation
 import './default/openApi';

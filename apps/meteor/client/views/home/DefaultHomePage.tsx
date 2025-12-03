@@ -5,10 +5,12 @@ import type { ReactElement } from 'react';
 
 import HomePageHeader from './HomePageHeader';
 import AddUsersCard from './cards/AddUsersCard';
+import AIChatbotCard from './cards/AIChatbotCard';
 import CreateChannelsCard from './cards/CreateChannelsCard';
 import CustomContentCard from './cards/CustomContentCard';
 import DesktopAppsCard from './cards/DesktopAppsCard';
 import DocumentationCard from './cards/DocumentationCard';
+import IntegrationsCard from './cards/IntegrationsCard';
 import JoinRoomsCard from './cards/JoinRoomsCard';
 import MobileAppsCard from './cards/MobileAppsCard';
 import Page from '../../components/Page/Page';
@@ -36,9 +38,11 @@ const DefaultHomePage = (): ReactElement => {
 				</Box>
 				<Box mi='neg-x8'>
 					<CardGroup wrap stretch>
+						<AIChatbotCard />
 						{canAddUsers && <AddUsersCard />}
 						{canCreateChannel && <CreateChannelsCard />}
 						<JoinRoomsCard />
+						<IntegrationsCard />
 						<MobileAppsCard />
 						<DesktopAppsCard />
 						<DocumentationCard />

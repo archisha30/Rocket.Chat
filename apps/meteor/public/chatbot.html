@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rocket.Chat AI Assistant</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #F5D3C4 0%, #F2AEBB 100%);
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        .header {
+            background: linear-gradient(135deg, #696FC7 0%, #A7AAE1 100%);
+            color: white;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .header-info h1 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .header-info p {
+            font-size: 13px;
+            opacity: 0.9;
+        }
+
+        .messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            background: linear-gradient(180deg, #F5D3C4 0%, #F2AEBB 100%);
+        }
+
+        .message {
+            margin-bottom: 16px;
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .message.user {
+            justify-content: flex-end;
+        }
+
+        .message-bubble {
+            max-width: 70%;
+            padding: 12px 16px;
+            border-radius: 12px;
+            line-height: 1.5;
+        }
+
+        .message.bot .message-bubble {
+            background: white;
+            color: #2d3748;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .message.user .message-bubble {
+            background: #696FC7;
+            color: white;
+            box-shadow: 0 2px 8px rgba(105, 111, 199, 0.2);
+        }
+
+        .typing {
+            display: flex;
+            gap: 4px;
+            padding: 12px 16px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            width: fit-content;
+        }
+
+        .typing span {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #696FC7;
+            animation: bounce 1.4s infinite;
+        }
+
+        .typing span:nth-child(2) { animation-delay: 0.2s; }
+        .typing span:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes bounce {
+            0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
+            30% { transform: translateY(-10px); opacity: 1; }
+        }
+
+        .suggestions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .suggestion-btn {
+            padding: 8px 16px;
+            border: 2px solid #696FC7;
+            border-radius: 8px;
+            background: white;
+            color: #696FC7;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .suggestion-btn:hover {
+            background: #696FC7;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .input-area {
+            background: white;
+            border-top: 1px solid #e5e7eb;
+            padding: 16px 20px;
+            display: flex;
+            gap: 12px;
+        }
+
+        .input-area input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        .input-area input:focus {
+            outline: none;
+            border-color: #696FC7;
+        }
+
+        .send-btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            background: #696FC7;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .send-btn:hover {
+            background: #5a60b8;
+            transform: translateY(-2px);
+        }
+
+        .send-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        @media (max-width: 640px) {
+            .message-bubble { max-width: 85%; }
+            .header { padding: 16px; }
+            .messages { padding: 16px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="avatar">🤖</div>
+            <div class="header-info">
+                <h1>Rocket.Chat AI Assistant</h1>
+                <p>● Online • Ready to help</p>
+            </div>
+        </div>
+
+        <div class="messages" id="messages"></div>
+
+        <div class="input-area">
+            <input 
+                type="text" 
+                id="userInput" 
+                placeholder="Type your message..."
+                onkeypress="if(event.key==='Enter') sendMessage()"
+            >
+            <button class="send-btn" onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <script>
+        const responses = {
+            greeting: [
+                "Hello! 👋 How can I help you today?",
+                "Hi there! Welcome to Rocket.Chat! What can I do for you?",
+            ],
+            help: [
+                "I can help you with:\n• Creating channels\n• Sending messages\n• Video calls\n• File sharing\n• And much more!",
+            ],
+            channels: [
+                "To create a channel, click the '+' button in the sidebar and select 'Create Channel'. You can make it public or private!",
+            ],
+            messages: [
+                "Sending messages is easy! Just type in the message box and press Enter. You can format text, add emojis, and attach files!",
+            ],
+            video: [
+                "Start a video call by clicking the camera icon in any channel or direct message!",
+            ],
+            files: [
+                "Share files by clicking the attachment icon or drag and drop files into the chat!",
+            ],
+            security: [
+                "Rocket.Chat takes security seriously! We offer end-to-end encryption, two-factor authentication, and compliance with major security standards.",
+            ],
+            default: [
+                "I'm not sure I understand. Try asking about channels, messages, video calls, or type 'help'!",
+            ],
+        };
+
+        const keywords = {
+            'hello': 'greeting', 'hi': 'greeting', 'hey': 'greeting',
+            'help': 'help', 'assist': 'help',
+            'channel': 'channels', 'room': 'channels',
+            'message': 'messages', 'chat': 'messages',
+            'video': 'video', 'call': 'video',
+            'file': 'files', 'upload': 'files',
+            'security': 'security', 'secure': 'security',
+        };
+
+        function getResponse(message) {
+            const lower = message.toLowerCase();
+            for (const [keyword, category] of Object.entries(keywords)) {
+                if (lower.includes(keyword)) {
+                    const categoryResponses = responses[category];
+                    return categoryResponses[Math.floor(Math.random() * categoryResponses.length)];
+                }
+            }
+            return responses.default[0];
+        }
+
+        function addMessage(text, sender = 'bot', suggestions = null) {
+            const messagesDiv = document.getElementById('messages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}`;
+            
+            const bubbleDiv = document.createElement('div');
+            bubbleDiv.className = 'message-bubble';
+            bubbleDiv.textContent = text;
+            messageDiv.appendChild(bubbleDiv);
+            
+            if (suggestions && sender === 'bot') {
+                const suggestionsDiv = document.createElement('div');
+                suggestionsDiv.className = 'suggestions';
+                suggestions.forEach(suggestion => {
+                    const btn = document.createElement('button');
+                    btn.className = 'suggestion-btn';
+                    btn.textContent = suggestion;
+                    btn.onclick = () => {
+                        document.getElementById('userInput').value = suggestion;
+                        sendMessage();
+                    };
+                    suggestionsDiv.appendChild(btn);
+                });
+                messageDiv.appendChild(suggestionsDiv);
+            }
+            
+            messagesDiv.appendChild(messageDiv);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+
+        function showTyping() {
+            const messagesDiv = document.getElementById('messages');
+            const typingDiv = document.createElement('div');
+            typingDiv.id = 'typing';
+            typingDiv.className = 'typing';
+            typingDiv.innerHTML = '<span></span><span></span><span></span>';
+            messagesDiv.appendChild(typingDiv);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+
+        function hideTyping() {
+            const typing = document.getElementById('typing');
+            if (typing) typing.remove();
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('userInput');
+            const message = input.value.trim();
+            
+            if (!message) return;
+            
+            addMessage(message, 'user');
+            input.value = '';
+            
+            showTyping();
+            setTimeout(() => {
+                hideTyping();
+                const response = getResponse(message);
+                addMessage(response, 'bot');
+            }, 800);
+        }
+
+        // Welcome message
+        setTimeout(() => {
+            addMessage(
+                "👋 Welcome to Rocket.Chat! I'm your AI assistant. How can I help you today?",
+                'bot',
+                ['How do I create a channel?', 'Tell me about security', 'I need help']
+            );
+        }, 500);
+    </script>
+</body>
+</html>

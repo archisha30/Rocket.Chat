@@ -19,6 +19,11 @@ type WorkspaceStatusPageProps = {
 	instances: IInstance[];
 	onClickRefreshButton: () => void;
 	onClickDownloadInfo: () => void;
+	autoCreateStatus?: {
+		isCreating: boolean;
+		createdChannels: string[];
+		errors: string[];
+	};
 };
 
 const WorkspacePage = ({
@@ -29,6 +34,7 @@ const WorkspacePage = ({
 	instances,
 	onClickRefreshButton,
 	onClickDownloadInfo,
+	autoCreateStatus,
 }: WorkspaceStatusPageProps) => {
 	const { t } = useTranslation();
 
@@ -52,6 +58,26 @@ const WorkspacePage = ({
 
 			<PageScrollableContentWithShadow p={16}>
 				<Box marginBlock='none' marginInline='auto' width='full' color='default'>
+					{autoCreateStatus?.isCreating && (
+						<Callout type='info' marginBlockEnd={16}>
+							🚀 Creating suggested channels and discussions...
+						</Callout>
+					)}
+					{autoCreateStatus && autoCreateStatus.createdChannels.length > 0 && (
+						<Callout type='success' marginBlockEnd={16}>
+							✅ Successfully created channels: {autoCreateStatus.createdChannels.join(', ')}
+						</Callout>
+					)}
+					{autoCreateStatus && autoCreateStatus.errors.length > 0 && (
+						<Callout type='warning' marginBlockEnd={16}>
+							⚠️ Some channels could not be created:
+							<Box is='ul' marginInlineStart={16}>
+								{autoCreateStatus.errors.map((error, index) => (
+									<li key={index}>{error}</li>
+								))}
+							</Box>
+						</Callout>
+					)}
 					{warningMultipleInstances && (
 						<Callout type='warning' title={t('Multiple_monolith_instances_alert')} marginBlockEnd={16}></Callout>
 					)}

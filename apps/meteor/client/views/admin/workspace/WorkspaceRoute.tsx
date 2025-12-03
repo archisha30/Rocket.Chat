@@ -1,9 +1,10 @@
-import { Callout, ButtonGroup, Button } from '@rocket.chat/fuselage';
+import { Callout, ButtonGroup, Button, Box } from '@rocket.chat/fuselage';
 import { usePermission } from '@rocket.chat/ui-contexts';
 import type { ReactElement } from 'react';
 import { memo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { useAutoCreateChannels } from './useAutoCreateChannels';
 import WorkspacePage from './WorkspacePage';
 import { Page, PageHeader, PageScrollableContentWithShadow } from '../../../components/Page';
 import PageSkeleton from '../../../components/PageSkeleton';
@@ -17,6 +18,9 @@ const WorkspaceRoute = (): ReactElement => {
 
 	const [refreshStatistics, setRefreshStatistics] = useState(false);
 	const [serverInfoQuery, instancesQuery, statisticsQuery] = useWorkspaceInfo({ refreshStatistics });
+	
+	// Auto-create suggested channels and discussions
+	const { isCreating, createdChannels, errors } = useAutoCreateChannels();
 
 	if (!canViewStatistics) {
 		return <NotAuthorizedPage />;
@@ -61,6 +65,11 @@ const WorkspaceRoute = (): ReactElement => {
 			instances={instancesQuery.data}
 			onClickRefreshButton={handleClickRefreshButton}
 			onClickDownloadInfo={handleClickDownloadInfo}
+			autoCreateStatus={{
+				isCreating,
+				createdChannels,
+				errors,
+			}}
 		/>
 	);
 };

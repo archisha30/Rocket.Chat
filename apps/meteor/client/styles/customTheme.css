@@ -1,0 +1,523 @@
+/* Custom Theme Colors - Purple & Peach Palette */
+:root {
+  /* Primary Colors */
+  --rcx-color-primary: #696FC7;
+  --rcx-color-primary-light: #A7AAE1;
+  --rcx-color-secondary: #F5D3C4;
+  --rcx-color-accent: #F2AEBB;
+  
+  /* Background Colors */
+  --rcx-color-surface: #ffffff;
+  --rcx-color-surface-tint: #F5D3C4;
+  --rcx-color-background: linear-gradient(135deg, #F5D3C4 0%, #F2AEBB 100%);
+  
+  /* Text Colors */
+  --rcx-color-font-default: #2d3748;
+  --rcx-color-font-secondary: #4a5568;
+  --rcx-color-font-hint: #718096;
+  --rcx-color-font-on-primary: #ffffff;
+  
+  /* Button colors */
+  --rcx-button-primary-background-color: #696FC7;
+  --rcx-button-primary-background-color-hover: #5a60b8;
+  --rcx-button-primary-color: #ffffff;
+  --rcx-button-secondary-background-color: #F2AEBB;
+  --rcx-button-secondary-background-color-hover: #e89aa6;
+  
+  /* Sidebar colors */
+  --rcx-sidebar-background: linear-gradient(180deg, #696FC7 0%, #A7AAE1 100%);
+  --rcx-sidebar-item-background-color-hover: rgba(255, 255, 255, 0.15);
+  --rcx-sidebar-item-background-color-selected: rgba(255, 255, 255, 0.25);
+  --rcx-sidebar-item-color: #ffffff;
+  --rcx-sidebar-footer-background: #5a60b8;
+  
+  /* Header colors */
+  --rcx-header-background: linear-gradient(90deg, #696FC7 0%, #A7AAE1 100%);
+  --rcx-header-color: #ffffff;
+  
+  /* Message colors */
+  --rcx-message-background-color-me: #696FC7;
+  --rcx-message-background-color-other: #F5D3C4;
+  --rcx-message-color-me: #ffffff;
+  --rcx-message-color-other: #2d3748;
+  
+  /* Link colors */
+  --rcx-link-color: #696FC7;
+  --rcx-link-color-hover: #5a60b8;
+  --rcx-link-visited-color: #5a60b8;
+  
+  /* Badge colors */
+  --rcx-badge-background-color: #F2AEBB;
+  --rcx-badge-color: #ffffff;
+  
+  /* Input colors */
+  --rcx-input-border-color: #F5D3C4;
+  --rcx-input-border-color-focus: #696FC7;
+  
+  /* Status colors */
+  --rcx-status-bullet-online: #10b981;
+}
+
+/* Body and Main Background */
+body {
+  background: linear-gradient(135deg, #F5D3C4 0%, #F2AEBB 100%) !important;
+}
+
+.main-content {
+  background: linear-gradient(135deg, #F5D3C4 0%, #F2AEBB 100%) !important;
+}
+
+/* Sidebar styling */
+.rcx-sidebar,
+[class*="sidebar"] {
+  background: linear-gradient(180deg, #696FC7 0%, #A7AAE1 100%) !important;
+}
+
+.rcx-sidebar__item,
+[class*="sidebar-item"] {
+  color: white !important;
+}
+
+.rcx-sidebar__item:hover,
+[class*="sidebar-item"]:hover {
+  background: rgba(255, 255, 255, 0.15) !important;
+}
+
+.rcx-sidebar__item--selected,
+[class*="sidebar-item--selected"] {
+  background: rgba(255, 255, 255, 0.25) !important;
+}
+
+.rcx-sidebar-footer {
+  background: #5a60b8 !important;
+}
+
+/* Header styling */
+.rcx-header,
+[class*="header"] {
+  background: linear-gradient(90deg, #696FC7 0%, #A7AAE1 100%) !important;
+  color: white !important;
+}
+
+.rcx-header__title,
+.rcx-header__name {
+  color: white !important;
+}
+
+/* Button styling */
+.rcx-button--primary {
+  background: linear-gradient(135deg, #696FC7 0%, #A7AAE1 100%) !important;
+  color: white !important;
+  border: none !important;
+}
+
+.rcx-button--primary:hover {
+  background: linear-gradient(135deg, #5a60b8 0%, #9295d4 100%) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(105, 111, 199, 0.3);
+}
+
+/* Message bubbles */
+.rcx-message--me .rcx-message-body {
+  background: #696FC7 !important;
+  color: white !important;
+}
+
+.rcx-message--other .rcx-message-body {
+  background: #F5D3C4 !important;
+  color: #2d3748 !important;
+}
+
+/* Input fields */
+.rcx-input-box {
+  border-color: #F5D3C4 !important;
+}
+
+.rcx-input-box:focus {
+  border-color: #696FC7 !important;
+  box-shadow: 0 0 0 2px rgba(105, 111, 199, 0.2) !important;
+}
+
+/* Badges */
+.rcx-badge {
+  background: #F2AEBB !important;
+  color: white !important;
+}
+
+/* Channel items */
+.rcx-sidebar-item__badge {
+  background: #F2AEBB !important;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar-thumb {
+  background: #A7AAE1 !important;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #696FC7 !important;
+}
+
+/* Links */
+a {
+  color: #696FC7 !important;
+}
+
+a:hover {
+  color: #5a60b8 !important;
+}
+
+/* Tabs */
+.rcx-tabs__item--selected {
+  border-bottom-color: #696FC7 !important;
+  color: #696FC7 !important;
+}
+
+/* Cards */
+.rcx-box--card {
+  border: 1px solid #F5D3C4 !important;
+}
+
+/* Status indicators */
+.rcx-status--online {
+  background: #10b981 !important;
+}
+
+/* Room header */
+.rcx-room-header {
+  background: linear-gradient(90deg, #F5D3C4 0%, #F2AEBB 100%) !important;
+  color: #2d3748 !important;
+}
+
+/* Home page background and text */
+[data-qa="page-home"],
+.page-home {
+  background: linear-gradient(135deg, #F5D3C4 0%, #F2AEBB 100%) !important;
+}
+
+/* Home page text - make it black for visibility */
+[data-qa="page-home"] h1,
+[data-qa="page-home"] h2,
+[data-qa="page-home"] h3,
+[data-qa="page-home"] h4,
+[data-qa="page-home"] h5,
+[data-qa="page-home"] h6,
+[data-qa="page-home"] p,
+[data-qa="page-home"] span,
+[data-qa="page-home"] div,
+[data-qa="page-home"] [class*="Box"],
+.page-home h1,
+.page-home h2,
+.page-home h3,
+.page-home h4,
+.page-home h5,
+.page-home h6,
+.page-home p,
+.page-home span,
+.page-home div {
+  color: #000000 !important;
+}
+
+/* Welcome text specifically */
+[data-qa-id="homepage-welcome-text"],
+[data-qa-id="homepage-welcome-text"] * {
+  color: #000000 !important;
+  font-weight: 600 !important;
+}
+
+/* Content areas */
+.rcx-content,
+.main-content,
+[class*="content"] {
+  background: linear-gradient(135deg, #F5D3C4 0%, #F2AEBB 100%) !important;
+}
+
+/* Cards on home page */
+.rcx-card {
+  background: white !important;
+  border: 2px solid #F2AEBB !important;
+  transition: all 0.3s ease !important;
+}
+
+.rcx-card:hover {
+  border-color: #696FC7 !important;
+  box-shadow: 0 4px 12px rgba(105, 111, 199, 0.2) !important;
+  transform: translateY(-2px) !important;
+}
+
+/* Card text - ensure it's black and remove backgrounds */
+.rcx-card h1,
+.rcx-card h2,
+.rcx-card h3,
+.rcx-card h4,
+.rcx-card h5,
+.rcx-card h6,
+.rcx-card p,
+.rcx-card span,
+.rcx-card div {
+  color: #000000 !important;
+  background: transparent !important;
+}
+
+/* Remove highlighted backgrounds from card headers and titles */
+.rcx-card__header,
+.rcx-card__title,
+.rcx-card-header,
+[class*="card"] h1,
+[class*="card"] h2,
+[class*="card"] h3,
+[class*="card"] h4,
+[class*="Card"] h1,
+[class*="Card"] h2,
+[class*="Card"] h3,
+[class*="Card"] h4 {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+/* Remove button backgrounds on home page cards */
+[data-qa="page-home"] button,
+[data-qa="page-home"] .rcx-button {
+  background: transparent !important;
+  border: 2px solid #696FC7 !important;
+  color: #696FC7 !important;
+}
+
+[data-qa="page-home"] button:hover,
+[data-qa="page-home"] .rcx-button:hover {
+  background: #696FC7 !important;
+  color: white !important;
+}
+
+/* Composer */
+.rcx-message-composer {
+  border-top: 2px solid #F5D3C4 !important;
+}
+
+/* Avatar borders - remove grey background squares */
+.rcx-avatar {
+  border: none !important;
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+/* Remove grey squares from all logo containers */
+.rcx-avatar__image,
+.rcx-avatar img,
+[class*="avatar"] img,
+[class*="Avatar"] img,
+[class*="logo"] img,
+[class*="Logo"] img,
+img[alt*="logo"],
+img[alt*="Logo"] {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+/* Remove background from icon containers */
+.rcx-icon,
+[class*="icon"],
+[class*="Icon"] {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+/* Sidebar logo */
+.rcx-sidebar__topbar,
+.rcx-sidebar-topbar,
+[class*="sidebar"] img,
+[class*="Sidebar"] img {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+/* Navigation and Menu */
+.rcx-nav-item--active {
+  background: rgba(105, 111, 199, 0.1) !important;
+  color: #696FC7 !important;
+}
+
+/* Modal backgrounds */
+.rcx-modal {
+  background: white !important;
+}
+
+.rcx-modal__header {
+  background: linear-gradient(90deg, #696FC7 0%, #A7AAE1 100%) !important;
+  color: white !important;
+}
+
+/* Toasts and notifications */
+.rcx-toast {
+  border-left: 4px solid #696FC7 !important;
+}
+
+/* Select and dropdown */
+.rcx-select:focus,
+.rcx-input:focus {
+  border-color: #696FC7 !important;
+  box-shadow: 0 0 0 2px rgba(105, 111, 199, 0.2) !important;
+}
+
+/* Checkbox and radio */
+.rcx-check-box__input:checked + .rcx-check-box__fake {
+  background: #696FC7 !important;
+  border-color: #696FC7 !important;
+}
+
+.rcx-radio-button__input:checked + .rcx-radio-button__fake {
+  border-color: #696FC7 !important;
+}
+
+.rcx-radio-button__input:checked + .rcx-radio-button__fake::before {
+  background: #696FC7 !important;
+}
+
+/* Toggle switch */
+.rcx-toggle-switch__input:checked + .rcx-toggle-switch__fake {
+  background: #696FC7 !important;
+}
+
+/* Progress bar */
+.rcx-progress-bar__fill {
+  background: #696FC7 !important;
+}
+
+/* Skeleton loading */
+.rcx-skeleton {
+  background: linear-gradient(90deg, #F5D3C4 0%, #F2AEBB 50%, #F5D3C4 100%) !important;
+}
+
+/* Divider */
+.rcx-divider {
+  border-color: #F2AEBB !important;
+}
+
+/* Message list background */
+.rcx-message-list,
+[class*="message-list"] {
+  background: linear-gradient(180deg, #F5D3C4 0%, #F2AEBB 100%) !important;
+}
+
+/* Room list */
+.rcx-room-list {
+  background: transparent !important;
+}
+
+/* Search bar */
+.rcx-search-bar {
+  background: rgba(255, 255, 255, 0.2) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+}
+
+.rcx-search-bar:focus-within {
+  background: rgba(255, 255, 255, 0.3) !important;
+  border-color: white !important;
+}
+
+/* Contextual bar */
+.rcx-contextual-bar {
+  background: white !important;
+  border-left: 2px solid #F2AEBB !important;
+}
+
+.rcx-contextual-bar__header {
+  background: linear-gradient(90deg, #F5D3C4 0%, #F2AEBB 100%) !important;
+  color: #2d3748 !important;
+}
+
+/* Emoji picker */
+.rcx-emoji-picker {
+  border: 2px solid #F2AEBB !important;
+}
+
+/* Menu */
+.rcx-menu {
+  border: 1px solid #F2AEBB !important;
+}
+
+.rcx-menu__item {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+.rcx-menu__item:hover {
+  background: rgba(105, 111, 199, 0.1) !important;
+}
+
+/* Remove pink highlights from menu items */
+.rcx-option,
+.rcx-option__content,
+[class*="option"],
+[class*="Option"],
+[role="menuitem"],
+[role="option"] {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+.rcx-option:hover,
+[role="menuitem"]:hover,
+[role="option"]:hover {
+  background: rgba(105, 111, 199, 0.1) !important;
+}
+
+/* User menu items */
+.rcx-user-menu__item,
+[class*="user-menu"] [class*="item"],
+[class*="UserMenu"] [class*="item"] {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+.rcx-user-menu__item:hover {
+  background: rgba(105, 111, 199, 0.1) !important;
+}
+
+/* Pagination */
+.rcx-pagination__link--active {
+  background: #696FC7 !important;
+  color: white !important;
+}
+
+/* Tag */
+.rcx-tag {
+  background: #F2AEBB !important;
+  color: white !important;
+}
+
+/* Chip */
+.rcx-chip {
+  background: #F5D3C4 !important;
+  color: #2d3748 !important;
+}
+
+/* Accordion */
+.rcx-accordion-item__bar {
+  background: #F5D3C4 !important;
+}
+
+.rcx-accordion-item__bar:hover {
+  background: #F2AEBB !important;
+}
+
+/* Remove ALL highlighted backgrounds from home page elements */
+[data-qa="page-home"] * {
+  background-image: none !important;
+}
+
+/* Specifically target card sections with backgrounds */
+[data-qa="page-home"] [class*="Box"]:not(.rcx-card) {
+  background: transparent !important;
+}
+
+/* Remove background from all text elements on home page */
+[data-qa="page-home"] h1 *,
+[data-qa="page-home"] h2 *,
+[data-qa="page-home"] h3 *,
+[data-qa="page-home"] h4 *,
+[data-qa="page-home"] button *,
+[data-qa="page-home"] a * {
+  background: transparent !important;
+  background-color: transparent !important;
+}
