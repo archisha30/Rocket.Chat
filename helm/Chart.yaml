@@ -1,0 +1,15 @@
+apiVersion: v2
+name: rocketchat
+description: A Helm chart for Rocket.Chat with custom theme
+type: application
+version: 1.0.0
+appVersion: "6.0.0"
+keywords:
+  - rocketchat
+  - chat
+  - messaging
+home: https://rocket.chat
+sources:
+  - https://github.com/archisha30/Rocket.Chat
+maintainers:
+  - name: Rocket.Chat Team

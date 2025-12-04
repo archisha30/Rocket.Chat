@@ -1,0 +1,11 @@
+# Simple Dockerfile using official Rocket.Chat image with custom theme
+FROM rocket.chat:latest
+
+# Copy custom theme files
+COPY --chown=rocketchat:rocketchat apps/meteor/client/styles/customTheme.css /app/bundle/programs/web.browser/app/
+COPY --chown=rocketchat:rocketchat apps/meteor/public/chatbot.html /app/bundle/programs/web.browser/app/
+
+# Expose port
+EXPOSE 3000
+
+# Use the default entrypoint from the base image

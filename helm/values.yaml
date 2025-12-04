@@ -1,0 +1,70 @@
+# Default values for Rocket.Chat Helm chart
+
+# Rocket.Chat configuration
+rocketchat:
+  replicaCount: 2
+  image:
+    repository: rocket.chat
+    tag: latest
+    pullPolicy: IfNotPresent
+  
+  service:
+    type: LoadBalancer
+    port: 80
+    targetPort: 3000
+  
+  resources:
+    requests:
+      memory: "1Gi"
+      cpu: "500m"
+    limits:
+      memory: "2Gi"
+      cpu: "1000m"
+  
+  env:
+    ROOT_URL: "http://rocketchat.local"
+    PORT: "3000"
+
+# MongoDB configuration
+mongodb:
+  enabled: true
+  image:
+    repository: mongo
+    tag: "6.0"
+  
+  auth:
+    username: rocketchat
+    password: rocketchat123
+    database: rocketchat
+  
+  persistence:
+    enabled: true
+    size: 10Gi
+    storageClass: ""
+  
+  resources:
+    requests:
+      memory: "512Mi"
+      cpu: "500m"
+    limits:
+      memory: "1Gi"
+      cpu: "1000m"
+
+# Ingress configuration
+ingress:
+  enabled: false
+  className: nginx
+  annotations: {}
+  hosts:
+    - host: rocketchat.local
+      paths:
+        - path: /
+          pathType: Prefix
+  tls: []
+
+# Autoscaling
+autoscaling:
+  enabled: false
+  minReplicas: 2
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 70
