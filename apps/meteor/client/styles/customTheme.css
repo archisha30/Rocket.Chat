@@ -1,58 +1,58 @@
-/* Custom Theme Colors - Purple & Peach Palette */
+/* Custom Theme Colors - Warm Neutral Palette */
 :root {
   /* Primary Colors */
-  --rcx-color-primary: #696FC7;
-  --rcx-color-primary-light: #A7AAE1;
-  --rcx-color-secondary: #F5D3C4;
-  --rcx-color-accent: #F2AEBB;
+  --rcx-color-primary: #D6A99D;
+  --rcx-color-primary-light: #FBF3D5;
+  --rcx-color-secondary: #D6DAC8;
+  --rcx-color-accent: #D6A99D;
   
   /* Background Colors */
   --rcx-color-surface: #ffffff;
-  --rcx-color-surface-tint: #F5D3C4;
-  --rcx-color-background: linear-gradient(135deg, #F5D3C4 0%, #F2AEBB 100%);
+  --rcx-color-surface-tint: #FBF3D5;
+  --rcx-color-background: linear-gradient(135deg, #FBF3D5 0%, #D6DAC8 100%);
   
   /* Text Colors */
   --rcx-color-font-default: #2d3748;
   --rcx-color-font-secondary: #4a5568;
   --rcx-color-font-hint: #718096;
-  --rcx-color-font-on-primary: #ffffff;
+  --rcx-color-font-on-primary: #2d3748;
   
   /* Button colors */
-  --rcx-button-primary-background-color: #696FC7;
-  --rcx-button-primary-background-color-hover: #5a60b8;
-  --rcx-button-primary-color: #ffffff;
-  --rcx-button-secondary-background-color: #F2AEBB;
-  --rcx-button-secondary-background-color-hover: #e89aa6;
+  --rcx-button-primary-background-color: #D6A99D;
+  --rcx-button-primary-background-color-hover: #c79a8e;
+  --rcx-button-primary-color: #2d3748;
+  --rcx-button-secondary-background-color: #D6DAC8;
+  --rcx-button-secondary-background-color-hover: #c7cbb9;
   
   /* Sidebar colors */
-  --rcx-sidebar-background: linear-gradient(180deg, #696FC7 0%, #A7AAE1 100%);
+  --rcx-sidebar-background: linear-gradient(180deg, #D6A99D 0%, #D6DAC8 100%);
   --rcx-sidebar-item-background-color-hover: rgba(255, 255, 255, 0.15);
   --rcx-sidebar-item-background-color-selected: rgba(255, 255, 255, 0.25);
-  --rcx-sidebar-item-color: #ffffff;
-  --rcx-sidebar-footer-background: #5a60b8;
+  --rcx-sidebar-item-color: #2d3748;
+  --rcx-sidebar-footer-background: #c79a8e;
   
   /* Header colors */
-  --rcx-header-background: linear-gradient(90deg, #696FC7 0%, #A7AAE1 100%);
-  --rcx-header-color: #ffffff;
+  --rcx-header-background: linear-gradient(90deg, #D6A99D 0%, #D6DAC8 100%);
+  --rcx-header-color: #2d3748;
   
   /* Message colors */
-  --rcx-message-background-color-me: #696FC7;
-  --rcx-message-background-color-other: #F5D3C4;
-  --rcx-message-color-me: #ffffff;
+  --rcx-message-background-color-me: #D6A99D;
+  --rcx-message-background-color-other: #FBF3D5;
+  --rcx-message-color-me: #2d3748;
   --rcx-message-color-other: #2d3748;
   
   /* Link colors */
-  --rcx-link-color: #696FC7;
-  --rcx-link-color-hover: #5a60b8;
-  --rcx-link-visited-color: #5a60b8;
+  --rcx-link-color: #D6A99D;
+  --rcx-link-color-hover: #c79a8e;
+  --rcx-link-visited-color: #c79a8e;
   
   /* Badge colors */
-  --rcx-badge-background-color: #F2AEBB;
-  --rcx-badge-color: #ffffff;
+  --rcx-badge-background-color: #D6A99D;
+  --rcx-badge-color: #2d3748;
   
   /* Input colors */
-  --rcx-input-border-color: #F5D3C4;
-  --rcx-input-border-color-focus: #696FC7;
+  --rcx-input-border-color: #D6DAC8;
+  --rcx-input-border-color-focus: #D6A99D;
   
   /* Status colors */
   --rcx-status-bullet-online: #10b981;
@@ -60,22 +60,22 @@
 
 /* Body and Main Background */
 body {
-  background: linear-gradient(135deg, #F5D3C4 0%, #F2AEBB 100%) !important;
+  background: linear-gradient(135deg, #FBF3D5 0%, #D6DAC8 100%) !important;
 }
 
 .main-content {
-  background: linear-gradient(135deg, #F5D3C4 0%, #F2AEBB 100%) !important;
+  background: linear-gradient(135deg, #FBF3D5 0%, #D6DAC8 100%) !important;
 }
 
 /* Sidebar styling */
 .rcx-sidebar,
 [class*="sidebar"] {
-  background: linear-gradient(180deg, #696FC7 0%, #A7AAE1 100%) !important;
+  background: linear-gradient(180deg, #D6A99D 0%, #D6DAC8 100%) !important;
 }
 
 .rcx-sidebar__item,
 [class*="sidebar-item"] {
-  color: white !important;
+  color: #2d3748 !important;
 }
 
 .rcx-sidebar__item:hover,
@@ -89,93 +89,93 @@ body {
 }
 
 .rcx-sidebar-footer {
-  background: #5a60b8 !important;
+  background: #c79a8e !important;
 }
 
 /* Header styling */
 .rcx-header,
 [class*="header"] {
-  background: linear-gradient(90deg, #696FC7 0%, #A7AAE1 100%) !important;
-  color: white !important;
+  background: linear-gradient(90deg, #D6A99D 0%, #D6DAC8 100%) !important;
+  color: #2d3748 !important;
 }
 
 .rcx-header__title,
 .rcx-header__name {
-  color: white !important;
+  color: #2d3748 !important;
 }
 
 /* Button styling */
 .rcx-button--primary {
-  background: linear-gradient(135deg, #696FC7 0%, #A7AAE1 100%) !important;
-  color: white !important;
+  background: linear-gradient(135deg, #D6A99D 0%, #D6DAC8 100%) !important;
+  color: #2d3748 !important;
   border: none !important;
 }
 
 .rcx-button--primary:hover {
-  background: linear-gradient(135deg, #5a60b8 0%, #9295d4 100%) !important;
+  background: linear-gradient(135deg, #c79a8e 0%, #c7cbb9 100%) !important;
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(105, 111, 199, 0.3);
+  box-shadow: 0 4px 12px rgba(214, 169, 157, 0.3);
 }
 
 /* Message bubbles */
 .rcx-message--me .rcx-message-body {
-  background: #696FC7 !important;
-  color: white !important;
+  background: #D6A99D !important;
+  color: #2d3748 !important;
 }
 
 .rcx-message--other .rcx-message-body {
-  background: #F5D3C4 !important;
+  background: #FBF3D5 !important;
   color: #2d3748 !important;
 }
 
 /* Input fields */
 .rcx-input-box {
-  border-color: #F5D3C4 !important;
+  border-color: #D6DAC8 !important;
 }
 
 .rcx-input-box:focus {
-  border-color: #696FC7 !important;
-  box-shadow: 0 0 0 2px rgba(105, 111, 199, 0.2) !important;
+  border-color: #D6A99D !important;
+  box-shadow: 0 0 0 2px rgba(214, 169, 157, 0.2) !important;
 }
 
 /* Badges */
 .rcx-badge {
-  background: #F2AEBB !important;
-  color: white !important;
+  background: #D6A99D !important;
+  color: #2d3748 !important;
 }
 
 /* Channel items */
 .rcx-sidebar-item__badge {
-  background: #F2AEBB !important;
+  background: #D6A99D !important;
 }
 
 /* Scrollbar */
 ::-webkit-scrollbar-thumb {
-  background: #A7AAE1 !important;
+  background: #D6DAC8 !important;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #696FC7 !important;
+  background: #D6A99D !important;
 }
 
 /* Links */
 a {
-  color: #696FC7 !important;
+  color: #D6A99D !important;
 }
 
 a:hover {
-  color: #5a60b8 !important;
+  color: #c79a8e !important;
 }
 
 /* Tabs */
 .rcx-tabs__item--selected {
-  border-bottom-color: #696FC7 !important;
-  color: #696FC7 !important;
+  border-bottom-color: #D6A99D !important;
+  color: #D6A99D !important;
 }
 
 /* Cards */
 .rcx-box--card {
-  border: 1px solid #F5D3C4 !important;
+  border: 1px solid #D6DAC8 !important;
 }
 
 /* Status indicators */
@@ -185,14 +185,14 @@ a:hover {
 
 /* Room header */
 .rcx-room-header {
-  background: linear-gradient(90deg, #F5D3C4 0%, #F2AEBB 100%) !important;
+  background: linear-gradient(90deg, #FBF3D5 0%, #D6DAC8 100%) !important;
   color: #2d3748 !important;
 }
 
 /* Home page background and text */
 [data-qa="page-home"],
 .page-home {
-  background: linear-gradient(135deg, #F5D3C4 0%, #F2AEBB 100%) !important;
+  background: linear-gradient(135deg, #FBF3D5 0%, #D6DAC8 100%) !important;
 }
 
 /* Home page text - make it black for visibility */
@@ -229,19 +229,19 @@ a:hover {
 .rcx-content,
 .main-content,
 [class*="content"] {
-  background: linear-gradient(135deg, #F5D3C4 0%, #F2AEBB 100%) !important;
+  background: linear-gradient(135deg, #FBF3D5 0%, #D6DAC8 100%) !important;
 }
 
 /* Cards on home page */
 .rcx-card {
   background: white !important;
-  border: 2px solid #F2AEBB !important;
+  border: 2px solid #D6DAC8 !important;
   transition: all 0.3s ease !important;
 }
 
 .rcx-card:hover {
-  border-color: #696FC7 !important;
-  box-shadow: 0 4px 12px rgba(105, 111, 199, 0.2) !important;
+  border-color: #D6A99D !important;
+  box-shadow: 0 4px 12px rgba(214, 169, 157, 0.2) !important;
   transform: translateY(-2px) !important;
 }
 
@@ -279,19 +279,19 @@ a:hover {
 [data-qa="page-home"] button,
 [data-qa="page-home"] .rcx-button {
   background: transparent !important;
-  border: 2px solid #696FC7 !important;
-  color: #696FC7 !important;
+  border: 2px solid #D6A99D !important;
+  color: #D6A99D !important;
 }
 
 [data-qa="page-home"] button:hover,
 [data-qa="page-home"] .rcx-button:hover {
-  background: #696FC7 !important;
-  color: white !important;
+  background: #D6A99D !important;
+  color: #2d3748 !important;
 }
 
 /* Composer */
 .rcx-message-composer {
-  border-top: 2px solid #F5D3C4 !important;
+  border-top: 2px solid #D6DAC8 !important;
 }
 
 /* Avatar borders - remove grey background squares */
@@ -333,8 +333,8 @@ img[alt*="Logo"] {
 
 /* Navigation and Menu */
 .rcx-nav-item--active {
-  background: rgba(105, 111, 199, 0.1) !important;
-  color: #696FC7 !important;
+  background: rgba(214, 169, 157, 0.1) !important;
+  color: #D6A99D !important;
 }
 
 /* Modal backgrounds */
@@ -343,60 +343,60 @@ img[alt*="Logo"] {
 }
 
 .rcx-modal__header {
-  background: linear-gradient(90deg, #696FC7 0%, #A7AAE1 100%) !important;
-  color: white !important;
+  background: linear-gradient(90deg, #D6A99D 0%, #D6DAC8 100%) !important;
+  color: #2d3748 !important;
 }
 
 /* Toasts and notifications */
 .rcx-toast {
-  border-left: 4px solid #696FC7 !important;
+  border-left: 4px solid #D6A99D !important;
 }
 
 /* Select and dropdown */
 .rcx-select:focus,
 .rcx-input:focus {
-  border-color: #696FC7 !important;
-  box-shadow: 0 0 0 2px rgba(105, 111, 199, 0.2) !important;
+  border-color: #D6A99D !important;
+  box-shadow: 0 0 0 2px rgba(214, 169, 157, 0.2) !important;
 }
 
 /* Checkbox and radio */
 .rcx-check-box__input:checked + .rcx-check-box__fake {
-  background: #696FC7 !important;
-  border-color: #696FC7 !important;
+  background: #D6A99D !important;
+  border-color: #D6A99D !important;
 }
 
 .rcx-radio-button__input:checked + .rcx-radio-button__fake {
-  border-color: #696FC7 !important;
+  border-color: #D6A99D !important;
 }
 
 .rcx-radio-button__input:checked + .rcx-radio-button__fake::before {
-  background: #696FC7 !important;
+  background: #D6A99D !important;
 }
 
 /* Toggle switch */
 .rcx-toggle-switch__input:checked + .rcx-toggle-switch__fake {
-  background: #696FC7 !important;
+  background: #D6A99D !important;
 }
 
 /* Progress bar */
 .rcx-progress-bar__fill {
-  background: #696FC7 !important;
+  background: #D6A99D !important;
 }
 
 /* Skeleton loading */
 .rcx-skeleton {
-  background: linear-gradient(90deg, #F5D3C4 0%, #F2AEBB 50%, #F5D3C4 100%) !important;
+  background: linear-gradient(90deg, #FBF3D5 0%, #D6DAC8 50%, #FBF3D5 100%) !important;
 }
 
 /* Divider */
 .rcx-divider {
-  border-color: #F2AEBB !important;
+  border-color: #D6DAC8 !important;
 }
 
 /* Message list background */
 .rcx-message-list,
 [class*="message-list"] {
-  background: linear-gradient(180deg, #F5D3C4 0%, #F2AEBB 100%) !important;
+  background: linear-gradient(180deg, #FBF3D5 0%, #D6DAC8 100%) !important;
 }
 
 /* Room list */
@@ -418,22 +418,22 @@ img[alt*="Logo"] {
 /* Contextual bar */
 .rcx-contextual-bar {
   background: white !important;
-  border-left: 2px solid #F2AEBB !important;
+  border-left: 2px solid #D6DAC8 !important;
 }
 
 .rcx-contextual-bar__header {
-  background: linear-gradient(90deg, #F5D3C4 0%, #F2AEBB 100%) !important;
+  background: linear-gradient(90deg, #FBF3D5 0%, #D6DAC8 100%) !important;
   color: #2d3748 !important;
 }
 
 /* Emoji picker */
 .rcx-emoji-picker {
-  border: 2px solid #F2AEBB !important;
+  border: 2px solid #D6DAC8 !important;
 }
 
 /* Menu */
 .rcx-menu {
-  border: 1px solid #F2AEBB !important;
+  border: 1px solid #D6DAC8 !important;
 }
 
 .rcx-menu__item {
@@ -442,10 +442,10 @@ img[alt*="Logo"] {
 }
 
 .rcx-menu__item:hover {
-  background: rgba(105, 111, 199, 0.1) !important;
+  background: rgba(214, 169, 157, 0.1) !important;
 }
 
-/* Remove pink highlights from menu items */
+/* Remove highlights from menu items */
 .rcx-option,
 .rcx-option__content,
 [class*="option"],
@@ -459,7 +459,7 @@ img[alt*="Logo"] {
 .rcx-option:hover,
 [role="menuitem"]:hover,
 [role="option"]:hover {
-  background: rgba(105, 111, 199, 0.1) !important;
+  background: rgba(214, 169, 157, 0.1) !important;
 }
 
 /* User menu items */
@@ -471,34 +471,34 @@ img[alt*="Logo"] {
 }
 
 .rcx-user-menu__item:hover {
-  background: rgba(105, 111, 199, 0.1) !important;
+  background: rgba(214, 169, 157, 0.1) !important;
 }
 
 /* Pagination */
 .rcx-pagination__link--active {
-  background: #696FC7 !important;
-  color: white !important;
+  background: #D6A99D !important;
+  color: #2d3748 !important;
 }
 
 /* Tag */
 .rcx-tag {
-  background: #F2AEBB !important;
-  color: white !important;
+  background: #D6A99D !important;
+  color: #2d3748 !important;
 }
 
 /* Chip */
 .rcx-chip {
-  background: #F5D3C4 !important;
+  background: #FBF3D5 !important;
   color: #2d3748 !important;
 }
 
 /* Accordion */
 .rcx-accordion-item__bar {
-  background: #F5D3C4 !important;
+  background: #FBF3D5 !important;
 }
 
 .rcx-accordion-item__bar:hover {
-  background: #F2AEBB !important;
+  background: #D6DAC8 !important;
 }
 
 /* Remove ALL highlighted backgrounds from home page elements */
@@ -520,4 +520,67 @@ img[alt*="Logo"] {
 [data-qa="page-home"] a * {
   background: transparent !important;
   background-color: transparent !important;
+}
+
+/* Remove pinkish backgrounds from sidebar channel list */
+.rcx-sidebar-item,
+.rcx-sidebar-item__container,
+.rcx-sidebar-item__wrapper,
+[class*="SidebarItem"],
+[class*="sidebar-item"] {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+}
+
+/* Ensure sidebar text is black and visible */
+.rcx-sidebar-item__title,
+.rcx-sidebar-item__name,
+.rcx-sidebar-item span,
+.rcx-sidebar-item div,
+.rcx-sidebar h3,
+.rcx-sidebar h4,
+.rcx-sidebar p,
+[class*="sidebar"] span,
+[class*="sidebar"] div:not(.rcx-sidebar-item__badge),
+[class*="Sidebar"] span,
+[class*="Sidebar"] div {
+  color: #000000 !important;
+}
+
+/* Omnichannel section - remove background */
+[data-qa="sidebar-item-omnichannel"],
+[class*="omnichannel"],
+[class*="Omnichannel"] {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+/* Channel list items - remove all backgrounds */
+.rcx-sidebar-section,
+.rcx-sidebar-section__title,
+[class*="sidebar-section"] {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+/* Sidebar list wrapper */
+.rcx-sidebar__list,
+[class*="sidebar__list"] {
+  background: transparent !important;
+}
+
+/* Remove hover backgrounds that might be pinkish */
+.rcx-sidebar-item:hover {
+  background: rgba(0, 0, 0, 0.05) !important;
+}
+
+.rcx-sidebar-item--selected {
+  background: rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Sidebar avatars and icons - ensure they're visible */
+.rcx-sidebar-item__avatar,
+.rcx-sidebar-item__icon {
+  background: transparent !important;
 }

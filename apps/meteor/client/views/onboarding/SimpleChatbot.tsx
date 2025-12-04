@@ -199,7 +199,7 @@ export const SimpleChatbot: React.FC<{ onClose: () => void }> = ({ onClose }) =>
 				left: 0,
 				right: 0,
 				bottom: 0,
-				background: 'linear-gradient(135deg, #F5D3C4 0%, #F2AEBB 100%)',
+				background: 'linear-gradient(135deg, #FBF3D5 0%, #D6DAC8 100%)',
 				zIndex: 9999,
 				display: 'flex',
 				flexDirection: 'column',
@@ -208,13 +208,13 @@ export const SimpleChatbot: React.FC<{ onClose: () => void }> = ({ onClose }) =>
 			{/* Header */}
 			<div
 				style={{
-					background: 'linear-gradient(135deg, #696FC7 0%, #A7AAE1 100%)',
-					color: 'white',
+					background: 'linear-gradient(135deg, #D6A99D 0%, #D6DAC8 100%)',
+					color: '#2d3748',
 					padding: '20px',
 					display: 'flex',
 					alignItems: 'center',
 					justifyContent: 'space-between',
-					boxShadow: '0 4px 12px rgba(105, 111, 199, 0.3)',
+					boxShadow: '0 4px 12px rgba(214, 169, 157, 0.3)',
 				}}
 			>
 				<div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
@@ -233,16 +233,16 @@ export const SimpleChatbot: React.FC<{ onClose: () => void }> = ({ onClose }) =>
 						🤖
 					</div>
 					<div>
-						<div style={{ fontSize: '18px', fontWeight: 600, color: 'white' }}>Rocket.Chat AI Assistant</div>
-						<div style={{ fontSize: '13px', opacity: 0.95, color: 'white' }}>● Online • Ready to help</div>
+						<div style={{ fontSize: '18px', fontWeight: 600, color: '#2d3748' }}>Rocket.Chat AI Assistant</div>
+						<div style={{ fontSize: '13px', opacity: 0.95, color: '#2d3748' }}>● Online • Ready to help</div>
 					</div>
 				</div>
 				<button
 					onClick={onClose}
 					style={{
-						background: 'rgba(255,255,255,0.25)',
-						border: '2px solid white',
-						color: 'white',
+						background: 'rgba(255,255,255,0.5)',
+						border: '2px solid #2d3748',
+						color: '#2d3748',
 						padding: '8px 16px',
 						borderRadius: '8px',
 						cursor: 'pointer',
@@ -250,12 +250,12 @@ export const SimpleChatbot: React.FC<{ onClose: () => void }> = ({ onClose }) =>
 						transition: 'all 0.2s',
 					}}
 					onMouseEnter={(e) => {
-						e.currentTarget.style.background = 'white';
-						e.currentTarget.style.color = '#696FC7';
+						e.currentTarget.style.background = '#2d3748';
+						e.currentTarget.style.color = 'white';
 					}}
 					onMouseLeave={(e) => {
-						e.currentTarget.style.background = 'rgba(255,255,255,0.25)';
-						e.currentTarget.style.color = 'white';
+						e.currentTarget.style.background = 'rgba(255,255,255,0.5)';
+						e.currentTarget.style.color = '#2d3748';
 					}}
 				>
 					Skip
@@ -287,9 +287,9 @@ export const SimpleChatbot: React.FC<{ onClose: () => void }> = ({ onClose }) =>
 								maxWidth: '70%',
 								padding: '12px 16px',
 								borderRadius: '12px',
-								background: msg.sender === 'user' ? '#696FC7' : 'white',
-								color: msg.sender === 'user' ? 'white' : '#2d3748',
-								boxShadow: msg.sender === 'user' ? '0 2px 8px rgba(105, 111, 199, 0.3)' : '0 2px 8px rgba(0, 0, 0, 0.1)',
+								background: msg.sender === 'user' ? '#D6A99D' : 'white',
+								color: '#2d3748',
+								boxShadow: msg.sender === 'user' ? '0 2px 8px rgba(214, 169, 157, 0.3)' : '0 2px 8px rgba(0, 0, 0, 0.1)',
 								whiteSpace: 'pre-line',
 								lineHeight: '1.5',
 								fontWeight: 500,
@@ -317,7 +317,7 @@ export const SimpleChatbot: React.FC<{ onClose: () => void }> = ({ onClose }) =>
 									width: '8px',
 									height: '8px',
 									borderRadius: '50%',
-									background: '#696FC7',
+									background: '#D6A99D',
 									animation: 'bounce 1.4s infinite',
 								}}
 							/>
@@ -326,7 +326,7 @@ export const SimpleChatbot: React.FC<{ onClose: () => void }> = ({ onClose }) =>
 									width: '8px',
 									height: '8px',
 									borderRadius: '50%',
-									background: '#A7AAE1',
+									background: '#D6DAC8',
 									animation: 'bounce 1.4s infinite 0.2s',
 								}}
 							/>
@@ -335,7 +335,7 @@ export const SimpleChatbot: React.FC<{ onClose: () => void }> = ({ onClose }) =>
 									width: '8px',
 									height: '8px',
 									borderRadius: '50%',
-									background: '#F2AEBB',
+									background: '#FBF3D5',
 									animation: 'bounce 1.4s infinite 0.4s',
 								}}
 							/>
@@ -350,17 +350,17 @@ export const SimpleChatbot: React.FC<{ onClose: () => void }> = ({ onClose }) =>
 							marginTop: '20px',
 							padding: '16px 20px',
 							borderRadius: '12px',
-							background: 'linear-gradient(135deg, #696FC7 0%, #A7AAE1 100%)',
-							color: 'white',
+							background: 'linear-gradient(135deg, #D6A99D 0%, #D6DAC8 100%)',
+							color: '#2d3748',
 							textAlign: 'center',
-							boxShadow: '0 4px 12px rgba(105, 111, 199, 0.4)',
+							boxShadow: '0 4px 12px rgba(214, 169, 157, 0.4)',
 							animation: 'fadeIn 0.5s ease',
 						}}
 					>
-						<div style={{ fontSize: '16px', fontWeight: 600, marginBottom: '8px', color: 'white' }}>
+						<div style={{ fontSize: '16px', fontWeight: 600, marginBottom: '8px', color: '#2d3748' }}>
 							🚀 Redirecting to your workspace...
 						</div>
-						<div style={{ fontSize: '13px', opacity: 0.95, color: 'white' }}>
+						<div style={{ fontSize: '13px', opacity: 0.95, color: '#2d3748' }}>
 							Setting up your personalized channels and teams
 						</div>
 					</div>
@@ -376,24 +376,24 @@ export const SimpleChatbot: React.FC<{ onClose: () => void }> = ({ onClose }) =>
 							onClick={startOnboarding}
 							style={{
 								padding: '16px 20px',
-								border: '2px solid #696FC7',
+								border: '2px solid #D6A99D',
 								borderRadius: '12px',
-								background: 'linear-gradient(135deg, #696FC7 0%, #A7AAE1 100%)',
-								color: 'white',
+								background: 'linear-gradient(135deg, #D6A99D 0%, #D6DAC8 100%)',
+								color: '#2d3748',
 								fontSize: '15px',
 								fontWeight: 600,
 								cursor: 'pointer',
 								textAlign: 'center',
 								transition: 'all 0.2s',
-								boxShadow: '0 4px 12px rgba(105, 111, 199, 0.3)',
+								boxShadow: '0 4px 12px rgba(214, 169, 157, 0.3)',
 							}}
 							onMouseEnter={(e) => {
 								e.currentTarget.style.transform = 'translateY(-2px)';
-								e.currentTarget.style.boxShadow = '0 6px 16px rgba(105, 111, 199, 0.4)';
+								e.currentTarget.style.boxShadow = '0 6px 16px rgba(214, 169, 157, 0.4)';
 							}}
 							onMouseLeave={(e) => {
 								e.currentTarget.style.transform = 'translateY(0)';
-								e.currentTarget.style.boxShadow = '0 4px 12px rgba(105, 111, 199, 0.3)';
+								e.currentTarget.style.boxShadow = '0 4px 12px rgba(214, 169, 157, 0.3)';
 							}}
 						>
 							🚀 Start Interactive Setup
@@ -402,10 +402,10 @@ export const SimpleChatbot: React.FC<{ onClose: () => void }> = ({ onClose }) =>
 							onClick={() => handleSend('I need help')}
 							style={{
 								padding: '12px 16px',
-								border: '2px solid #F2AEBB',
+								border: '2px solid #D6DAC8',
 								borderRadius: '8px',
 								background: 'white',
-								color: '#696FC7',
+								color: '#D6A99D',
 								fontSize: '14px',
 								fontWeight: 500,
 								cursor: 'pointer',
@@ -413,11 +413,11 @@ export const SimpleChatbot: React.FC<{ onClose: () => void }> = ({ onClose }) =>
 								transition: 'all 0.2s',
 							}}
 							onMouseEnter={(e) => {
-								e.currentTarget.style.borderColor = '#696FC7';
-								e.currentTarget.style.background = '#F5D3C4';
+								e.currentTarget.style.borderColor = '#D6A99D';
+								e.currentTarget.style.background = '#FBF3D5';
 							}}
 							onMouseLeave={(e) => {
-								e.currentTarget.style.borderColor = '#F2AEBB';
+								e.currentTarget.style.borderColor = '#D6DAC8';
 								e.currentTarget.style.background = 'white';
 							}}
 						>
@@ -438,10 +438,10 @@ export const SimpleChatbot: React.FC<{ onClose: () => void }> = ({ onClose }) =>
 								onClick={() => handleOptionSelect(option)}
 								style={{
 									padding: '12px 16px',
-									border: '2px solid #696FC7',
+									border: '2px solid #D6A99D',
 									borderRadius: '8px',
 									background: 'white',
-									color: '#696FC7',
+									color: '#D6A99D',
 									fontSize: '14px',
 									fontWeight: 500,
 									cursor: 'pointer',
@@ -449,13 +449,13 @@ export const SimpleChatbot: React.FC<{ onClose: () => void }> = ({ onClose }) =>
 									transition: 'all 0.2s',
 								}}
 								onMouseEnter={(e) => {
-									e.currentTarget.style.background = 'linear-gradient(135deg, #696FC7 0%, #A7AAE1 100%)';
-									e.currentTarget.style.color = 'white';
+									e.currentTarget.style.background = 'linear-gradient(135deg, #D6A99D 0%, #D6DAC8 100%)';
+									e.currentTarget.style.color = '#2d3748';
 									e.currentTarget.style.transform = 'translateX(4px)';
 								}}
 								onMouseLeave={(e) => {
 									e.currentTarget.style.background = 'white';
-									e.currentTarget.style.color = '#696FC7';
+									e.currentTarget.style.color = '#D6A99D';
 									e.currentTarget.style.transform = 'translateX(0)';
 								}}
 							>
@@ -472,7 +472,7 @@ export const SimpleChatbot: React.FC<{ onClose: () => void }> = ({ onClose }) =>
 			<div
 				style={{
 					background: 'white',
-					borderTop: '2px solid #F5D3C4',
+					borderTop: '2px solid #D6DAC8',
 					padding: '16px 20px',
 					maxWidth: '800px',
 					width: '100%',
@@ -489,16 +489,16 @@ export const SimpleChatbot: React.FC<{ onClose: () => void }> = ({ onClose }) =>
 						style={{
 							flex: 1,
 							padding: '12px 16px',
-							border: '2px solid #F5D3C4',
+							border: '2px solid #D6DAC8',
 							borderRadius: '8px',
 							fontSize: '14px',
 							color: '#2d3748',
 						}}
 						onFocus={(e) => {
-							e.currentTarget.style.borderColor = '#696FC7';
+							e.currentTarget.style.borderColor = '#D6A99D';
 						}}
 						onBlur={(e) => {
-							e.currentTarget.style.borderColor = '#F5D3C4';
+							e.currentTarget.style.borderColor = '#D6DAC8';
 						}}
 					/>
 					<button
@@ -508,8 +508,8 @@ export const SimpleChatbot: React.FC<{ onClose: () => void }> = ({ onClose }) =>
 							padding: '12px 24px',
 							border: 'none',
 							borderRadius: '8px',
-							background: 'linear-gradient(135deg, #696FC7 0%, #A7AAE1 100%)',
-							color: 'white',
+							background: 'linear-gradient(135deg, #D6A99D 0%, #D6DAC8 100%)',
+							color: '#2d3748',
 							fontSize: '14px',
 							fontWeight: 600,
 							cursor: 'pointer',
@@ -519,7 +519,7 @@ export const SimpleChatbot: React.FC<{ onClose: () => void }> = ({ onClose }) =>
 						onMouseEnter={(e) => {
 							if (inputValue.trim()) {
 								e.currentTarget.style.transform = 'translateY(-2px)';
-								e.currentTarget.style.boxShadow = '0 4px 12px rgba(105, 111, 199, 0.3)';
+								e.currentTarget.style.boxShadow = '0 4px 12px rgba(214, 169, 157, 0.3)';
 							}
 						}}
 						onMouseLeave={(e) => {
